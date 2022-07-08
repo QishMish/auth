@@ -1,6 +1,5 @@
 import JWT from "jsonwebtoken";
-
-const { ACCESS_TOKEN_SECRET_KEY, REFRESH_TOKEN_SECRET_KEY } = process.env;
+import { ACCESS_TOKEN_SECRET_KEY, REFRESH_TOKEN_SECRET_KEY } from "../config/constants";
 
 export const signJwt = async (
   payload: object,

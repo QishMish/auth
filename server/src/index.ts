@@ -1,15 +1,16 @@
 require("express-async-errors");
 import "dotenv/config";
-import app from "./app";
 import App from "./app";
+import { PORT } from "./config/constants";
+import logger from "./config/Logger";
+import HttpException from "./exceptions/http.exception";
 
-App.listen(3333, () => {
-  console.log(`App listening on the port ${3333}`);
+App.listen(PORT, () => {
+  console.log(`App listening on the port ${PORT}`);
+  throw new HttpException(500, "error");
 });
 
 process.on("uncaughtException", (err, origin) => {
-  console.log("crashed");
-  App.listen(3333, () => {
-    console.log(`App listening on the port ${3333}`);
-  });
+  logger.error({ err });
+  process.exit(1);
 });
